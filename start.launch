@@ -15,7 +15,7 @@
     <node pkg="pyconnect" type="node.py" name="connect" />
     <node pkg="pypos" type="node.py" name="pos" />
     <node pkg="pysonder" type="node.py" name="sonder" />
-    <include file="/home/ipluto/dev/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/orb.launch">
+    <include file="$(find ORB_SLAM2)/orb.launch">
         <arg name="PATH_TO_VOCABULARY" value="$(arg PATH_TO_VOCABULARY)" />
         <arg name="PATH_TO_SETTINGS_FILE" value="$(arg PATH_TO_SETTINGS_FILE)" />
         <arg name="ONLINE_RECTIFICATION" value="$(arg ONLINE_RECTIFICATION)" />

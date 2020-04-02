@@ -8,7 +8,7 @@ import numpy as np
 
 # global settings
 rate = 10 # 10hz
-devNum = 1 # ls /dev/video*
+devNum = 0 # ls /dev/video*
            # lsusb
 
 # init global var

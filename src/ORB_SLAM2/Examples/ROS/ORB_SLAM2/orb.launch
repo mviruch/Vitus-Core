@@ -8,6 +8,6 @@
     <node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Stereo" output="screen" args="/home/ipluto/dev/src/ORB_SLAM2/Vocabulary/ORBvoc.bin /home/ipluto/dev/src/ORB_SLAM2/Examples/Stereo/EuRoC.yaml $(arg rect)">
     -->
 
-    <node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Stereo" output="screen" args="$(arg PATH_TO_VOCABULARY) $(arg PATH_TO_SETTINGS_FILE) $(arg ONLINE_RECTIFICATION)" launch-prefix="xterm -e" respawn="true"/>
+    <node name="ORB_SLAM2" pkg="ORB_SLAM2" type="Stereo" output="screen" args="$(arg PATH_TO_VOCABULARY) $(arg PATH_TO_SETTINGS_FILE) $(arg ONLINE_RECTIFICATION)" launch-prefix="xterm -e"/>
 
 </launch>
