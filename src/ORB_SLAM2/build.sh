@@ -29,3 +29,6 @@ mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make
+cd ..
+mkdir lib
+cp build/libORB_SLAM2.so lib/libORB_SLAM2.so
