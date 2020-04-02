@@ -3,7 +3,7 @@
 ├── demo                    演示
 │   └── pyfinder            盲道跟踪demo
 ├── devel                   ROS 生成
-├── doc                     文档目录
+├── docs                    文档目录
 │   ├── banner.txt          banner文件
 │   ├── base.py             将png图片转为base64
 │   ├── img                 图片目录
