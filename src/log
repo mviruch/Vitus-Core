@@ -1,0 +1,6 @@
+catkin_create_pkg pyfinder rospy std_msgs sensor_msgs
+catkin_create_pkg pyaudio rospy std_msgs
+catkin_create_pkg pypos rospy std_msgs geometry_msgs tf
+catkin_create_pkg pysonder rospy std_msgs sensor_msgs
+catkin_create_pkg pyconnect rospy std_msgs
+catkin_create_pkg pychecker rospy std_msgs sensor_msgs
