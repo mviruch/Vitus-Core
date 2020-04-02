@@ -1,0 +1,23 @@
+.
+├── build                   ROS 生成
+├── demo                    演示
+│   └── pyfinder            盲道跟踪demo
+├── devel                   ROS 生成
+├── doc                     文档目录
+│   ├── banner.txt          banner文件
+│   ├── base.py             将png图片转为base64
+│   ├── img                 图片目录
+│   └── README.md           说明文档
+├── myStereo.yaml           双目相机标定文件
+├── runSlam.bash            备份
+├── src                     程序目录
+│   ├── CMakeLists.txt      ROS 生成
+│   ├── log                 创建模块命令备份
+│   ├── ORB_SLAM2           ----
+│   ├── pyaudio             | 功
+│   ├── pychecker           | 能
+│   ├── pyconnect           | 模
+│   ├── pyfinder            | 块
+│   ├── pypos               |
+│   └── pysonder            ----
+└── start.launch            启动文件
