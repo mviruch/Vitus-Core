@@ -113,17 +113,17 @@
 
       打开[github](https://github.com/)， 点击右上角的头像， 并选择Settings
 
-      ![settings][img0]
+      ![settings](https://github.com/mviruch/Vitus-Core/blob/master/doc/img/PersonalSettings.png)
 
       在左侧Personal settings栏选择SSH and GPG keys
 
-       ![personalSettings][img1]
+       ![personalSettings](https://github.com/mviruch/Vitus-Core/blob/master/doc/img/PersonalSettings.png)
 
-      点击New SSH key ![new ssh key][img2]
+      点击New SSH key ![new ssh key](https://github.com/mviruch/Vitus-Core/blob/master/doc/img/SSHKeys.png)
 
       将生成的SSH Key粘贴到Key中， 并在title里命名, 最后点击Add SSH key
 
-      ![add ][img3]
+      ![add ](https://github.com/mviruch/Vitus-Core/blob/master/doc/img/addNew.png)
 
 
 
@@ -133,7 +133,7 @@
 
 1. 点击Clone or download 并复制地址
 
-   ![clone][img4]
+   ![clone](https://github.com/mviruch/Vitus-Core/blob/master/doc/img/clone.png)
 
 2. 在终端中输入如下命令
 
