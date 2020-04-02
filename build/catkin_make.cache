@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/ipluto/dev/devel -DCMAKE_INSTALL_PREFIX=/home/ipluto/dev/install -G Unix Makefiles
