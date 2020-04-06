@@ -268,12 +268,60 @@ catkin_make
 
 运行```roscore```
 
-执行如下命令
+1. 双目
 
-```bash
-source devel/setup.bash
-roslaunch start.launch
-```
+   执行如下命令
+
+   ```bash
+   source devel/setup.bash
+   roslaunch start.launch
+   ```
+
+   必选参数:
+
+   ​	无， 但下方列出了一些建议修改的参数
+
+   可选参数：
+
+   1. NODE，ORB_SLAM2运行模式， 默认值为Stereo
+
+   2. IMG_HEIGHT， 图像高度， 默认为720
+
+   3. IMG_WIDTH， 图像宽度， 默认为1280
+
+      > 注： 1280为单个图像大小， 即选择1280时实际摄像头是以1280的2倍 2560打开的， 获取到的也是宽度为2560大小的图像， 经过切分处理后再发布使用
+
+   4. DEVNUM， 设备编号， **建议修改**， 在终端中输入```ls /dev/video```后按Tab键， 可看到当前设备所拥有的视频输入设备号
+
+   5. PATH_TO_VOCABULARY， 词库， **不建议修改， 为加速启动时间，已由原版.txt改为.bin， 修改后可能会出错**
+
+   6. PATH_TO_SETTINGS_FILE， 标定文件， **建议修改**，双目可不修改
+
+   7. ONLINE_RECTIFICATION， **建议不改**
+
+2. 单目
+
+   执行一下命令
+
+   ```bash
+   source devel/setup.bash
+   roslaunch start.launch PATH_TO_SETTINGS_FILE:=/home/ipluto/Vitus-Core/src/ORB_SLAM2/Examples/Monocular/EuRoC.yaml NODE:=Mono
+   ```
+
+   必选参数:
+
+   1. NODE， 修改为Mono， 由默认的双目模式切换到单目模式
+
+   可选参数:
+
+   1. IMG_HEIGHT，同上
+   2. IMG_WIDTH， 同上
+   3. DEVNUM， 同上
+   4. PATH_TO_VOCABULARY， 同上
+   5. PATH_TO_SETTINGS_FILE， 同上
+   6. ONLINE_RECTIFICATION， 切换到单目时**已忽略**此参数
+
+>注： 当修改图像尺寸(IMG_HEIGHT, IMG_WIDTH)时， 需要同时修改对应标定文件内的图像尺寸信息
 
 
 
