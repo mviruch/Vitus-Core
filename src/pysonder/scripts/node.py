@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import sys
 import rospy
 from std_msgs.msg import Header
 from sensor_msgs.msg import Image
@@ -14,10 +15,16 @@ class var:
     puber = {}
     imgTmp = {}
 
+def display(frame):
+    print frame.shape
+    cv2.imshow('frame', frame)
+    cv2.waitKey(1)
+
 def publish(img, name, header):
     var.imgTmp[name].header = header
     var.imgTmp[name].data = img.tostring()
     var.puber[name].publish(var.imgTmp[name])
+    # display(img)
 
 def publishStereo(img, width):
     # image topic
@@ -44,12 +51,12 @@ def createImage(h, w):
     ret.height = h
     ret.width = w
     ret.encoding = 'rgb8'
-    ret.stamp = w*3
+    ret.step = w*3
     return ret
 
 def main(devNum, h, w, func, node):
     rospy.init_node('voicer')
-    r = rospy.Rate(var.rate)
+    r = rospy.Rate(rate)
     cat = cv2.VideoCapture(devNum)
     cat.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
     if node == 'Stereo':
@@ -70,6 +77,7 @@ def main(devNum, h, w, func, node):
         r.sleep()
 
 if __name__ == '__main__':
+    # print len(sys.argv)
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--deviceNum', help='the device number which u want to use, command ls /dev/video*\
@@ -77,6 +85,7 @@ if __name__ == '__main__':
     parser.add_argument('--node', help='type of the node which will be running, like Stereo, Mono')
     parser.add_argument('--height', help='image height')
     parser.add_argument('--width', help='image width, noteice it will be helf of the real val when u use Stereo')
+    sys.argv = rospy.myargv(argv=sys.argv)
 
     args = parser.parse_args()
     if args.node == 'Stereo':
