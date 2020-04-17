@@ -20,14 +20,12 @@
 #include <vector>
 
 //#include <pcl/visualization/cloud_viewer.h> 
-/*
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>  
 #include <pcl_conversions/pcl_conversions.h> 
 #include <pcl_ros/transforms.h>
 #include <pcl_ros/point_cloud.h>
-*/
 
 #include <mutex>
 
@@ -72,7 +70,7 @@ namespace ORB_SLAM2
 
         void PublishPoseForROS(cv_bridge::CvImageConstPtr cv_ptr);
 
-        // void PublishPointCloudForROS(void);
+        void PublishPointCloudForROS(void);
 
         void PublishCurrentFrameForROS(void);
 
@@ -100,7 +98,7 @@ namespace ORB_SLAM2
 
         std::chrono::steady_clock::time_point tp1, tp2, tp3;
 
-        // void GetCurrentROSPointCloud(sensor_msgs::PointCloud2 &all_point_cloud, sensor_msgs::PointCloud2 &ref_point_cloud);
+        void GetCurrentROSPointCloud(sensor_msgs::PointCloud2 &all_point_cloud, sensor_msgs::PointCloud2 &ref_point_cloud);
     };
 }
 #endif // SLAMDATA_H

@@ -503,4 +503,19 @@ vector<cv::KeyPoint> System::GetTrackedKeyPointsUn()
     return mTrackedKeyPointsUn;
 }
 
+const vector<MapPoint*> System::GetmpMapAllMapPoints(void)
+{
+    return mpMap->GetAllMapPoints();
+}
+
+const vector<MapPoint*> System::GetmpMapReferenceMapPoints(void)
+{
+    return mpMap->GetReferenceMapPoints();
+}
+
+FrameDrawer* System::GetpFrameDrawer(void)
+{
+    return mpFrameDrawer;
+}
+
 } //namespace ORB_SLAM
