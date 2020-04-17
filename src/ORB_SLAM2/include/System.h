@@ -121,6 +121,9 @@ public:
     int GetTrackingState();
     std::vector<MapPoint*> GetTrackedMapPoints();
     std::vector<cv::KeyPoint> GetTrackedKeyPointsUn();
+    const vector<MapPoint*> GetmpMapAllMapPoints(void);
+    const vector<MapPoint*> GetmpMapReferenceMapPoints(void);
+    FrameDrawer* GetpFrameDrawer(void);
 
 private:
 

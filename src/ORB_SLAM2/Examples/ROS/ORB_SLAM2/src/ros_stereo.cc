@@ -188,7 +188,7 @@ void ImageGrabber::GrabStereo(const sensor_msgs::ImageConstPtr& msgLeft,const se
         // cout << "PublishTFForROS" << endl;
         mpSLAMDATA->PublishPoseForROS(cv_ptrLeft);
         // cout << "PublishPoseForROS" << endl;
-        //mpSLAMDATA->PublishPointCloudForROS();
+        mpSLAMDATA->PublishPointCloudForROS();
         // cout << "PublishCurrentFrameForROS" << endl;
         mpSLAMDATA->PublishCurrentFrameForROS();
     }  

@@ -21,7 +21,7 @@ SlamData::SlamData(ORB_SLAM2::System* pSLAM, ros::NodeHandle *nodeHandler, bool 
     pose_pub = (*nodeHandler).advertise<geometry_msgs::PoseStamped>("posestamped", 1000);
     pose_inc_pub = (*nodeHandler).advertise<geometry_msgs::PoseWithCovarianceStamped>("incremental_pose_cov", 1000);
  
-    // all_point_cloud_pub = (*nodeHandler).advertise<sensor_msgs::PointCloud2>("point_cloud_all",1);
+    all_point_cloud_pub = (*nodeHandler).advertise<sensor_msgs::PointCloud2>("point_cloud_all",1);
     ref_point_cloud_pub = (*nodeHandler).advertise<sensor_msgs::PointCloud2>("point_cloud_ref",1);
 
     mInitCam2Ground_R << 1,0,0,0,0,1,0,-1,0;  // camera coordinate represented in ground coordinate system
@@ -114,18 +114,15 @@ void SlamData::PublishPoseForROS(cv_bridge::CvImageConstPtr cv_ptr)
 
 }
 
-/*
 void SlamData::PublishPointCloudForROS(void)
 {
     sensor_msgs::PointCloud2 allMapPoints;
     sensor_msgs::PointCloud2 referenceMapPoints;
     GetCurrentROSPointCloud(allMapPoints, referenceMapPoints);
-    // all_point_cloud_pub.publish(allMapPoints);
+    all_point_cloud_pub.publish(allMapPoints);
     ref_point_cloud_pub.publish(referenceMapPoints);
 }
-*/
 
-/*
 void SlamData::GetCurrentROSPointCloud(sensor_msgs::PointCloud2 &all_point_cloud, sensor_msgs::PointCloud2 &ref_point_cloud)
 {
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud_all( new pcl::PointCloud<pcl::PointXYZRGBA> );  
@@ -195,7 +192,6 @@ void SlamData::GetCurrentROSPointCloud(sensor_msgs::PointCloud2 &all_point_cloud
     ref_point_cloud.header.frame_id = "world";
     ref_point_cloud.header.stamp = ros::Time::now(); 
 }
-*/
 
 void SlamData::PublishCurrentFrameForROS(void)
 {
