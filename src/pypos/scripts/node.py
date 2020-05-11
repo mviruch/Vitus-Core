@@ -17,13 +17,17 @@ def callback(p):
     global x, y, z
     ori = p.pose.orientation
     po = p.pose.position
-    head = {'x':ori.x, 'y':ori.y, 'z':ori.z, 'w':ori.w}
-    (roll, pitch, yaw) = euler_from_quaternion([ori.x, ori.y, ori.z, ori.w])
+    # head = {'x':ori.x, 'y':ori.y, 'z':ori.z, 'w':ori.w}
+    # (roll, pitch, yaw) = euler_from_quaternion([ori.x, ori.y, ori.z, ori.w])
     # print '{} {} {}'.format(roll, pitch, yaw)
     # print 'current position (x:%f, y:%f, z:%f), theta:%f'%(ori.x, ori.y, ori.z, yaw)
-    x = po.x
-    y = po.y
-    z = po.z
+    if x ==0 and y == 0 and z ==0:
+        x = po.x
+        y = po.y
+        z = po.z
+    else:
+        # print 'distence {}.'.format(math.sqrt(x-po.x)**2 + (y-po.y)**2 + (z-po.z)**2)
+        pass
 
 def main():
     rospy.init_node('pos')

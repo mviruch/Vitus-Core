@@ -4,16 +4,16 @@
     <arg name="NODE" default="Stereo" />
     <arg name="IMG_HEIGHT" default="720" />
     <arg name="IMG_WIDTH" default="1280" />
-    <arg name="DEVNUM" default="1"/>
+    <arg name="DEV_NUM" default="1"/>
     <arg name="PATH_TO_VOCABULARY" default="$(find ORB_SLAM2)/../../../Vocabulary/ORBvoc.bin" />
     <arg name="PATH_TO_SETTINGS_FILE" default="$(find ORB_SLAM2)/../../../../../myStereo.yaml" />
     <arg name="ONLINE_RECTIFICATION" default="true" />
 
     <node pkg="pyaudio" type="node.py" name="audio" />
-    <node pkg="pychecker" type="node.py" name="checker" />
+    <node pkg="pychecker" type="node.py" name="checker" output="screen" />
     <node pkg="pyconnect" type="node.py" name="connect" />
     <node pkg="pypos" type="node.py" name="pos" />
-    <node pkg="pysonder" type="node.py" name="sonder" args="--deviceNum $(arg DEVNUM) --node $(arg NODE) --height $(arg IMG_HEIGHT) --width $(arg IMG_WIDTH)" output="screen" launch-prefix="xterm -e" />
+    <node pkg="pysonder" type="node.py" name="sonder" args="--deviceNum $(arg DEV_NUM) --node $(arg NODE) --height $(arg IMG_HEIGHT) --width $(arg IMG_WIDTH)"  />
     <include file="$(find ORB_SLAM2)/$(arg NODE).launch">
         <arg name="NODE" value="$(arg NODE)" />
         <arg name="PATH_TO_VOCABULARY" value="$(arg PATH_TO_VOCABULARY)" />

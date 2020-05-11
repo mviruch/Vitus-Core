@@ -518,4 +518,9 @@ FrameDrawer* System::GetpFrameDrawer(void)
     return mpFrameDrawer;
 }
 
+Tracking* System::GetTracker(void)
+{
+    return mpTracker;
+}
+
 } //namespace ORB_SLAM

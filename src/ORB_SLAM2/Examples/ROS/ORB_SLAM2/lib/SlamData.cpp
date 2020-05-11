@@ -12,6 +12,7 @@ SlamData::SlamData(ORB_SLAM2::System* pSLAM, ros::NodeHandle *nodeHandler, bool 
 {
     mpSLAM = pSLAM;
     // mpFrameDrawer = mpSLAM->GetpFrameDrawer();
+    mpTracker = mpSLAM->GetTracker();
     bEnablePublishROSTopic = bPublishROSTopic;
     // Perform tf transform and publish
     last_transform.setOrigin(tf::Vector3(0,0,0));
@@ -69,6 +70,12 @@ void SlamData::CalculateAndPrintOutProcessingFrequency(void)
     cout << "\n\n" << endl;
 
     spinCnt++;
+}
+
+void SlamData::PublishCurrentKeyForROS()
+{
+    vector<cv::KeyPoint> vCurrentKeys = mpTracker->mCurrentFrame.mvKeys;
+    
 }
 
 void SlamData::PublishTFForROS(cv::Mat Tcw, cv_bridge::CvImageConstPtr cv_ptr)

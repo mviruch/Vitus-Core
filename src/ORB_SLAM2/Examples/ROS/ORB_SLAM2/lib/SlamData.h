@@ -82,6 +82,7 @@ namespace ORB_SLAM2
         ORB_SLAM2::System* mpSLAM;
         
         FrameDrawer* mpFrameDrawer;
+        Tracking* mpTracker;
         
         ros::Publisher pose_pub;
         ros::Publisher pose_inc_pub;

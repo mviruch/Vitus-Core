@@ -124,6 +124,7 @@ public:
     const vector<MapPoint*> GetmpMapAllMapPoints(void);
     const vector<MapPoint*> GetmpMapReferenceMapPoints(void);
     FrameDrawer* GetpFrameDrawer(void);
+    Tracking* System::GetTracker(void);
 
 private:
 
