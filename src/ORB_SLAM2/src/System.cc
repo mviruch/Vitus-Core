@@ -512,13 +512,18 @@ const vector<MapPoint*> System::GetmpMapReferenceMapPoints(void)
 {
     return mpMap->GetReferenceMapPoints();
 }
-
+/*
 FrameDrawer* System::GetpFrameDrawer(void)
 {
     return mpFrameDrawer;
 }
 
 Tracking* System::GetTracker(void)
+{
+    return mpTracker;
+}
+*/
+Tracking* System::GetpFrameDrawer(void)
 {
     return mpTracker;
 }

@@ -4,6 +4,7 @@
 #include <Eigen/Dense>
 #include <Eigen/Geometry> 
 #include <opencv2/core/core.hpp>
+#include "ORB_SLAM2/keyPointPCLs.h"
 
 namespace ORB_SLAM2
 {
@@ -12,7 +13,8 @@ SlamData::SlamData(ORB_SLAM2::System* pSLAM, ros::NodeHandle *nodeHandler, bool 
 {
     mpSLAM = pSLAM;
     // mpFrameDrawer = mpSLAM->GetpFrameDrawer();
-    mpTracker = mpSLAM->GetTracker();
+    // mpTracker = mpSLAM->GetTracker();
+    mpTracker = mpSLAM->GetpFrameDrawer();
     bEnablePublishROSTopic = bPublishROSTopic;
     // Perform tf transform and publish
     last_transform.setOrigin(tf::Vector3(0,0,0));
@@ -24,6 +26,8 @@ SlamData::SlamData(ORB_SLAM2::System* pSLAM, ros::NodeHandle *nodeHandler, bool 
  
     all_point_cloud_pub = (*nodeHandler).advertise<sensor_msgs::PointCloud2>("point_cloud_all",1);
     ref_point_cloud_pub = (*nodeHandler).advertise<sensor_msgs::PointCloud2>("point_cloud_ref",1);
+
+    ref_keypoint_pcl_pub = (*nodeHandler).advertise<ORB_SLAM2::keyPointPCLs>("ref_keypoint_pcl_pub",1);
 
     mInitCam2Ground_R << 1,0,0,0,0,1,0,-1,0;  // camera coordinate represented in ground coordinate system
     mInitCam2Ground_t.setZero();     
@@ -74,8 +78,19 @@ void SlamData::CalculateAndPrintOutProcessingFrequency(void)
 
 void SlamData::PublishCurrentKeyForROS()
 {
-    vector<cv::KeyPoint> vCurrentKeys = mpTracker->mCurrentFrame.mvKeys;
-    
+    //vector<cv::KeyPoint> vCurrentKeys = mpTracker->mCurrentFrame.mvKeys;
+    Frame mCurrentFrame = mpTracker->mCurrentFrame;
+    keyPointPCLs tmp;
+    tmp.size = mCurrentFrame.N;
+    for (int i = 0; i < mCurrentFrame.N; i++)
+    {
+        // tmp.left.push_back(mCurrentFrame.mvKeys[i].pt);
+        tmp.ptX.push_back(mCurrentFrame.mvKeys[i].pt.x);
+        tmp.ptY.push_back(mCurrentFrame.mvKeys[i].pt.y);
+        tmp.rightY.push_back(mCurrentFrame.mvKeysRight[i].pt.x);
+        tmp.mDepth.push_back(mCurrentFrame.mvDepth[i]);
+    }
+    ref_keypoint_pcl_pub.publish(tmp);
 }
 
 void SlamData::PublishTFForROS(cv::Mat Tcw, cv_bridge::CvImageConstPtr cv_ptr)

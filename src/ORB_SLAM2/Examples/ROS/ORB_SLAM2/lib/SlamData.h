@@ -18,6 +18,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
 #include <vector>
+#include <opencv2/opencv.hpp>
 
 //#include <pcl/visualization/cloud_viewer.h> 
 #include <pcl/io/pcd_io.h>
@@ -34,6 +35,7 @@
 #include "../../../include/FrameDrawer.h"
 #include "../../../include/MapDrawer.h"
 #include "../../../include/System.h"
+#include "../../../include/Frame.h"
 
 #define MAP_SCALE 1.0f
 
@@ -70,6 +72,8 @@ namespace ORB_SLAM2
 
         void PublishPoseForROS(cv_bridge::CvImageConstPtr cv_ptr);
 
+        void PublishCurrentKeyForROS();
+
         void PublishPointCloudForROS(void);
 
         void PublishCurrentFrameForROS(void);
@@ -87,7 +91,8 @@ namespace ORB_SLAM2
         ros::Publisher pose_pub;
         ros::Publisher pose_inc_pub;
         ros::Publisher all_point_cloud_pub;
-        ros::Publisher ref_point_cloud_pub;  
+        ros::Publisher ref_point_cloud_pub;
+        ros::Publisher ref_keypoint_pcl_pub;
 
         image_transport::Publisher current_frame_pub;
 
@@ -102,5 +107,15 @@ namespace ORB_SLAM2
         void GetCurrentROSPointCloud(sensor_msgs::PointCloud2 &all_point_cloud, sensor_msgs::PointCloud2 &ref_point_cloud);
     };
 }
+
+struct keyPointPCLs
+{
+    int size;
+    vector<float> ptX;
+    vector<float> ptY;
+    vector<float> rightY;
+    vector<float> mDepth;
+};
+
 #endif // SLAMDATA_H
 
