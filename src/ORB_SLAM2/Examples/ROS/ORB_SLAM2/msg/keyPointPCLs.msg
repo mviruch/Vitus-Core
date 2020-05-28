@@ -1,5 +1,3 @@
 uint32 size
-float32[] ptX
-float32[] ptY
-float32[] rightY
-float32[] mDepth
+ORB_SLAM2/pointDepth[] pointDepth
+sensor_msgs/Image img

@@ -1,10 +1,12 @@
 #include "SlamData.h"
 
+#include <iostream>
 #include <Eigen/Core>
 #include <Eigen/Dense>
 #include <Eigen/Geometry> 
 #include <opencv2/core/core.hpp>
 #include "ORB_SLAM2/keyPointPCLs.h"
+#include "ORB_SLAM2/pointDepth.h"
 
 namespace ORB_SLAM2
 {
@@ -81,14 +83,29 @@ void SlamData::PublishCurrentKeyForROS()
     //vector<cv::KeyPoint> vCurrentKeys = mpTracker->mCurrentFrame.mvKeys;
     Frame mCurrentFrame = mpTracker->mCurrentFrame;
     keyPointPCLs tmp;
-    tmp.size = mCurrentFrame.N;
-    for (int i = 0; i < mCurrentFrame.N; i++)
-    {
-        // tmp.left.push_back(mCurrentFrame.mvKeys[i].pt);
-        tmp.ptX.push_back(mCurrentFrame.mvKeys[i].pt.x);
-        tmp.ptY.push_back(mCurrentFrame.mvKeys[i].pt.y);
-        tmp.rightY.push_back(mCurrentFrame.mvKeysRight[i].pt.x);
-        tmp.mDepth.push_back(mCurrentFrame.mvDepth[i]);
+    cv_bridge::CvImage cvi;
+    cv::Mat img;
+    cvi.header.frame_id = "frameLeft";
+    cvi.encoding = "bgr8";
+    cvi.header.stamp = ros::Time::now();
+    cvi.image = mpTracker->imRect;
+    sensor_msgs::Image im;
+    cvi.toImageMsg(im);
+    tmp.img = im;
+    tmp.size = 0;
+    if(mpTracker->mLastProcessedState==Tracking::OK) {
+        for (int i = 0; i < mCurrentFrame.N; i++)
+        {
+            MapPoint* pMP = mCurrentFrame.mvpMapPoints[i];
+            if(pMP && !mCurrentFrame.mvbOutlier[i] && mCurrentFrame.mvDepth[i] > 0 && pMP->Observations()>0) {
+                pointDepth pd;
+                pd.mDepth = mCurrentFrame.mvDepth[i];
+                pd.ptX = mCurrentFrame.mvKeys[i].pt.x;
+                pd.ptY = mCurrentFrame.mvKeys[i].pt.y;
+                tmp.pointDepth.push_back(pd);
+                tmp.size++;
+            }
+        }
     }
     ref_keypoint_pcl_pub.publish(tmp);
 }
@@ -223,7 +240,7 @@ void SlamData::PublishCurrentFrameForROS(void)
     cvi.encoding = "bgr8";
     cvi.header.stamp = ros::Time::now();
 
-	/*
+	
     if (mpFrameDrawer)
     {
         img = mpFrameDrawer->DrawFrame();
@@ -234,7 +251,7 @@ void SlamData::PublishCurrentFrameForROS(void)
         cvi.toImageMsg(im);
         current_frame_pub.publish(im);
     }
-	*/
+    
 }
 
 bool SlamData::EnablePublishROSTopics(void)

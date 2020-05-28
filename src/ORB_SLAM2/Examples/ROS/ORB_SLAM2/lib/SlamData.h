@@ -113,7 +113,7 @@ struct keyPointPCLs
     int size;
     vector<float> ptX;
     vector<float> ptY;
-    vector<float> rightY;
+    // vector<float> rightY;
     vector<float> mDepth;
 };
 

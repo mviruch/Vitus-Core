@@ -191,5 +191,7 @@ void ImageGrabber::GrabStereo(const sensor_msgs::ImageConstPtr& msgLeft,const se
         mpSLAMDATA->PublishPointCloudForROS();
         // cout << "PublishCurrentFrameForROS" << endl;
         mpSLAMDATA->PublishCurrentFrameForROS();
+        cout << "PublishCurrentKeyForROS" << endl;
+        mpSLAMDATA->PublishCurrentKeyForROS();
     }  
 }

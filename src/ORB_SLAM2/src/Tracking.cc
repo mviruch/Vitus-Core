@@ -166,6 +166,7 @@ void Tracking::SetViewer(Viewer *pViewer)
 
 cv::Mat Tracking::GrabImageStereo(const cv::Mat &imRectLeft, const cv::Mat &imRectRight, const double &timestamp)
 {
+    imRectLeft.copyTo(imRect);
     mImGray = imRectLeft;
     cv::Mat imGrayRight = imRectRight;
 
