@@ -107,6 +107,7 @@ void SlamData::PublishCurrentKeyForROS()
             }
         }
     }
+    cout << "！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！" << endl;
     ref_keypoint_pcl_pub.publish(tmp);
 }
 
@@ -234,6 +235,7 @@ void SlamData::GetCurrentROSPointCloud(sensor_msgs::PointCloud2 &all_point_cloud
 
 void SlamData::PublishCurrentFrameForROS(void)
 {
+    /*
     cv_bridge::CvImage cvi;
     cv::Mat img;
     cvi.header.frame_id = "frame";
@@ -251,7 +253,7 @@ void SlamData::PublishCurrentFrameForROS(void)
         cvi.toImageMsg(im);
         current_frame_pub.publish(im);
     }
-    
+    */
 }
 
 bool SlamData::EnablePublishROSTopics(void)
