@@ -12,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   roscpp
-  message_generation
+  pyconnect
 )
 
 ## System dependencies are found with CMake's conventions
@@ -54,10 +54,6 @@ find_package(catkin REQUIRED COMPONENTS
 #   Message1.msg
 #   Message2.msg
 # )
-add_message_files(
-  FILES
-  keyPointPCLs.msg
-)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -78,11 +74,6 @@ add_message_files(
 #   DEPENDENCIES
 #   sensor_msgs#   std_msgs
 # )
-
-generate_messages(
-  DEPENDENCIES
-  pychecker
-)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
