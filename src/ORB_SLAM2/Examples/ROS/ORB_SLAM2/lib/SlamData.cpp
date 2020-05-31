@@ -107,7 +107,6 @@ void SlamData::PublishCurrentKeyForROS()
             }
         }
     }
-    cout << "！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！" << endl;
     ref_keypoint_pcl_pub.publish(tmp);
 }
 
