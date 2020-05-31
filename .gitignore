@@ -6,3 +6,4 @@ tmp/
 .vscode/
 src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/msg_gen/
 src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/src/ORB_SLAM2/
+src/ORB_SLAM2/CMakeFiles/
