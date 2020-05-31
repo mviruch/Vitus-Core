@@ -120,7 +120,8 @@ int main(int argc, char **argv)
 
     message_filters::Subscriber<sensor_msgs::Image> left_sub(nh, "/camera/left/image_raw", 1);
     message_filters::Subscriber<sensor_msgs::Image> right_sub(nh, "camera/right/image_raw", 1);
-    typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::Image, sensor_msgs::Image> sync_pol;
+    // typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::Image, sensor_msgs::Image> sync_pol;
+    typedef message_filters::sync_policies::ExactTime<sensor_msgs::Image, sensor_msgs::Image> sync_pol;
     message_filters::Synchronizer<sync_pol> sync(sync_pol(10), left_sub,right_sub);
     sync.registerCallback(boost::bind(&ImageGrabber::GrabStereo,&igb,_1,_2));
 
@@ -130,10 +131,11 @@ int main(int argc, char **argv)
     SLAM.Shutdown();
 
     // Save camera trajectory
+    /*
     SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory_TUM_Format.txt");
     SLAM.SaveTrajectoryTUM("FrameTrajectory_TUM_Format.txt");
     SLAM.SaveTrajectoryKITTI("FrameTrajectory_KITTI_Format.txt");
-
+    */
     ros::shutdown();
 
     return 0;
@@ -191,7 +193,7 @@ void ImageGrabber::GrabStereo(const sensor_msgs::ImageConstPtr& msgLeft,const se
         mpSLAMDATA->PublishPointCloudForROS();
         // cout << "PublishCurrentFrameForROS" << endl;
         // mpSLAMDATA->PublishCurrentFrameForROS();
-        cout << "PublishCurrentKeyForROS" << endl;
-        mpSLAMDATA->PublishCurrentKeyForROS();
+        // cout << "PublishCurrentKeyForROS" << endl;
+        mpSLAMDATA->PublishCurrentKeyForROS(cv_ptrLeft);
     }  
 }

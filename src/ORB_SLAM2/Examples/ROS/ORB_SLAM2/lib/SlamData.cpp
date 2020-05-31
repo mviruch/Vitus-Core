@@ -78,7 +78,7 @@ void SlamData::CalculateAndPrintOutProcessingFrequency(void)
     spinCnt++;
 }
 
-void SlamData::PublishCurrentKeyForROS()
+void SlamData::PublishCurrentKeyForROS(cv_bridge::CvImageConstPtr cv_ptr)
 {
     //vector<cv::KeyPoint> vCurrentKeys = mpTracker->mCurrentFrame.mvKeys;
     Frame mCurrentFrame = mpTracker->mCurrentFrame;
@@ -91,7 +91,7 @@ void SlamData::PublishCurrentKeyForROS()
     cvi.image = mpTracker->imRect;
     sensor_msgs::Image im;
     cvi.toImageMsg(im);
-    tmp.img = im;
+    // tmp.img = im;
     tmp.size = 0;
     if(mpTracker->mLastProcessedState==Tracking::OK) {
         for (int i = 0; i < mCurrentFrame.N; i++)
@@ -107,6 +107,7 @@ void SlamData::PublishCurrentKeyForROS()
             }
         }
     }
+    tmp.header = cv_ptr->header;
     ref_keypoint_pcl_pub.publish(tmp);
 }
 

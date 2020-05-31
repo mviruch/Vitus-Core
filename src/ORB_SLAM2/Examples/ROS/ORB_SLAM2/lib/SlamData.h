@@ -72,7 +72,7 @@ namespace ORB_SLAM2
 
         void PublishPoseForROS(cv_bridge::CvImageConstPtr cv_ptr);
 
-        void PublishCurrentKeyForROS();
+        void PublishCurrentKeyForROS(cv_bridge::CvImageConstPtr cv_ptr);
 
         void PublishPointCloudForROS(void);
 

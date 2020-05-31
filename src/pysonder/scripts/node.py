@@ -14,6 +14,8 @@ class var:
     # devNum = 0  # ls /dev/video*
     puber = {}
     imgTmp = {}
+    stamp = 0
+    stampMax = 64
 
 def display(frame):
     print frame.shape
@@ -37,14 +39,18 @@ def publishStereo(img, width):
     imgL = img[:, width:]
     imgR = img[:, :width]
     header = Header(stamp=rospy.Time.now())
+    # header = Header(stamp=var.stamp)
     header.frame_id = 'map'
     publish(imgL, 'left', header)
     publish(imgR, 'right', header)
+    # var.stamp = (var.stamp+1)%var.stampMax
 
 def publistMono(img, width):
     header = Header(stamp=rospy.Time.now())
+    # header = Header(stamp=var.stamp)
     header.frame_id = 'map'
     publish(img, 'mono', header)
+    # var.stamp = (var.stamp+1)%var.stampMax
 
 def createImage(h, w):
     ret = Image()
