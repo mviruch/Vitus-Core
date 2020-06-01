@@ -226,7 +226,7 @@ sudo apt install libeigen3-dev libblas-dev liblapack-dev
 
 在 ~/.bashrc末尾添加```export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:PATH/ORB_SLAM2/Examples/ROS```
 
-**注：PATH为ORB_SLAM地址**
+**注：PATH为ORB_SLAM2地址**
 
 > 例：
 >
@@ -238,7 +238,6 @@ cd ORB_SLAM2
 chmod +x build.sh
 chmod +x build_ros.sh
 ./build.sh
-./build_ros.sh
 ```
 
 ---
@@ -254,12 +253,13 @@ pip install numpy opencv-python
 ```
 
 ---
-### 编译ROS包
+### 编译ROS包(包含ORB_SLAM2)
 执行如下命令
 ```bash
 catkin_make
 ```
-
+> 注: 默认只编译双目节点, 如果要编译其他节点需要使用```roscd ORB_SLAM2```命令进入ORB_SLAM2目录, 编辑目录下的CMakeLists.txt文件中的
+> ```set(MONOCULAR 0)```、```set(MONOCULAR-AR 0)```、```set(RGB-D 0)```、```set(STEREO 1)```, 将值设置为1则代表编译对应节点, 设置为0则不编译
 
 
 ---
